@@ -1,43 +1,69 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router';
+import { Route } from 'react-router';
 
 import { fetchContacts } from './redux/contacts/contacts-operations';
-
-import { ContactsView } from './views/ContactsView/ContactsView';
-import { RegisterView } from './views/RegisterView/RegisterView';
-import { LoginView } from './views/LoginView/LoginView';
-import { refreshUser } from './redux/auth/auth-operation';
+import { refreshUser } from './redux/auth/auth-operations';
 
 import { Navigation } from './components/Navigation/Navigation';
+import { AuthNav } from './components/AuthNav/AuthNav';
+import { UserMenu } from './components/UserMenu/UserMenu';
+
+import { getIsLogIn } from './redux/auth/auth-selectors';
+
+import { PrivateRoute } from './Routes/PrivateRoute';
+import { PublicRoute } from './Routes/PublicRoute';
 
 import './App.scss';
 
+const HomeView = lazy(() => import('./views/HomeView/HomeView'));
+const ContactsView = lazy(() => import('./views/ContactsView/ContactsView'));
+const RegisterView = lazy(() => import('./views/RegisterView/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView/LoginView'));
+
 export default function App() {
-  const isLoading = useSelector(state => state.contacts.loading);
+  const isLogIn = useSelector(getIsLogIn);
+
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
-    <div className="container">
-      <h1 className="visually_hidden">Phonebook</h1>
+    <>
+      <div className="container">
+        <header style={{ display: 'flex', marginBottom: '20px' }}>
+          <Navigation />
+          {isLogIn ? <UserMenu /> : <AuthNav />}
+        </header>
 
-      <Navigation />
+        <main>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <PublicRoute exact path="/">
+              <HomeView />
+            </PublicRoute>
 
-      <Routes>
-        <Route path="register" element={<RegisterView />}></Route>
-        <Route path="login" element={<LoginView />}></Route>
-        <Route path="contacts" element={<ContactsView />}></Route>
-      </Routes>
+            <PublicRoute exact path="register" restricted>
+              <RegisterView />
+            </PublicRoute>
+            <PublicRoute exact path="login" restricted>
+              <LoginView />
+            </PublicRoute>
 
-      {isLoading && <h1>Loading...</h1>}
-    </div>
+            <PrivateRoute exact path="/contacts">
+              <ContactsView />
+            </PrivateRoute>
+          </Suspense>
+        </main>
+
+        <footer>footer</footer>
+      </div>
+    </>
   );
 }
 // ---------------------------------------------------

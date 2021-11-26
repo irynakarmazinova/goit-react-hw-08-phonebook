@@ -1,7 +1,9 @@
 import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { login } from '../../redux/auth/auth-operation';
+import Title from '../../components/Title/Title';
+
+import { logIn } from '../../redux/auth/auth-operations';
 
 import s from './LoginView.module.scss';
 
@@ -29,32 +31,44 @@ export function LoginView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(login(state));
+    dispatch(logIn(state));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className={s.input}
-        type="email"
-        password="email"
-        value={state.email}
-        onChange={e =>
-          setState({ type: e.target.name, payload: e.target.value })
-        }
-      />
-      <input
-        className={s.input}
-        type="password"
-        password="password"
-        value={state.password}
-        onChange={e =>
-          setState({ type: e.target.name, payload: e.target.value })
-        }
-      />
-      <button type="submit" className={s.btn}>
-        Login
-      </button>
-    </form>
+    <div>
+      <Title title="This is login page." />
+
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <label>
+          Email
+          <input
+            className={s.input}
+            type="text"
+            name="email"
+            value={state.email}
+            onChange={e =>
+              setState({ type: e.target.name, payload: e.target.value })
+            }
+          />
+        </label>
+
+        <label>
+          Password
+          <input
+            className={s.input}
+            type="password"
+            name="password"
+            value={state.password}
+            onChange={e =>
+              setState({ type: e.target.name, payload: e.target.value })
+            }
+          />
+        </label>
+
+        <button type="submit" className={s.btn}>
+          Login
+        </button>
+      </form>
+    </div>
   );
 }

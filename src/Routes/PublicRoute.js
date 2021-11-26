@@ -3,12 +3,13 @@ import { Route, Redirect } from 'react-router';
 
 import { getIsLogIn } from '../redux/auth/auth-selectors';
 
-export function PrivateRoute({ children, ...routeProps }) {
+export function PublicRoute({ children, restricted = false, ...routeProps }) {
   const isLogIn = useSelector(getIsLogIn);
+  const shouldRedirect = isLogIn && restricted;
 
   return (
     <Route {...routeProps}>
-      {isLogIn ? children : <Redirect to="/register" />}
+      {shouldRedirect ? <Redirect to="/" /> : children}
     </Route>
   );
 }

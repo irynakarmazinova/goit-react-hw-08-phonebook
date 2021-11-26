@@ -1,7 +1,9 @@
 import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { register } from '../../redux/auth/auth-operation';
+import Title from '../../components/Title/Title';
+
+import { register } from '../../redux/auth/auth-operations';
 
 import s from './RegisterView.module.scss';
 
@@ -37,37 +39,53 @@ export function RegisterView() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className={s.input}
-        type="text"
-        name="name"
-        value={state.name}
-        onChange={e =>
-          setState({ type: e.target.name, payload: e.target.value })
-        }
-      />
-      <input
-        className={s.input}
-        type="email"
-        password="email"
-        value={state.email}
-        onChange={e =>
-          setState({ type: e.target.name, payload: e.target.value })
-        }
-      />
-      <input
-        className={s.input}
-        type="password"
-        password="password"
-        value={state.password}
-        onChange={e =>
-          setState({ type: e.target.name, payload: e.target.value })
-        }
-      />
-      <button type="submit" className={s.btn}>
-        Register
-      </button>
-    </form>
+    <div className={s.box}>
+      <Title title="This is register page." />
+
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <label>
+          Name
+          <input
+            className={s.input}
+            type="text"
+            name="name"
+            value={state.name}
+            onChange={e =>
+              setState({ type: e.target.name, payload: e.target.value })
+            }
+          />
+        </label>
+
+        <label>
+          Email
+          <input
+            className={s.input}
+            type="text"
+            name="email"
+            value={state.email}
+            onChange={e =>
+              setState({ type: e.target.name, payload: e.target.value })
+            }
+          />
+        </label>
+
+        <label>
+          Password
+          <input
+            className={s.input}
+            type="password"
+            name="password"
+            value={state.password}
+            onChange={e =>
+              setState({ type: e.target.name, payload: e.target.value })
+            }
+          />
+        </label>
+
+        <button type="submit" className={s.btn}>
+          Register
+        </button>
+      </form>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
-import { filter } from '../filter/filter-reducer';
+// import { filter } from '../filter/filter-reducer';
 
 import {
   fetchContacts,
@@ -30,8 +30,8 @@ export const loading = createReducer(false, {
   [deleteContact.rejected]: () => false,
 });
 
-export const contacts = combineReducers({
-  items,
-  filter,
-  loading,
-});
+// export const contacts = combineReducers({
+//   items,
+//   filter,
+//   loading,
+// });

@@ -4,13 +4,17 @@ import ContactList from '../../components/ContactList/ContactList';
 
 import Filter from '../../components/Filter/Filter';
 
+import s from './ContactsView.module.scss';
+
 export function ContactsView() {
   return (
     <>
-      <Title title="Phonebook" />
+      <Title title="This is contacts page." />
+
+      <h2 className={s.title}>Phonebook</h2>
       <ContactForm />
 
-      <Title title="Contacts" />
+      <h2 className={s.title}>Contacts</h2>
       <Filter />
       <ContactList />
     </>
