@@ -1,6 +1,6 @@
 import Title from '../../components/Title/Title';
 
-export function HomeView() {
+export default function HomeView() {
   return (
     <div>
       <Title title="This is home page." />

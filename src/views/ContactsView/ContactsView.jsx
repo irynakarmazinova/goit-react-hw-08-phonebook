@@ -6,7 +6,7 @@ import Filter from '../../components/Filter/Filter';
 
 import s from './ContactsView.module.scss';
 
-export function ContactsView() {
+export default function ContactsView() {
   return (
     <>
       <Title title="This is contacts page." />

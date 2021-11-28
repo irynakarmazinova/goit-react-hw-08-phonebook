@@ -29,7 +29,7 @@ function reducer(state, action) {
   }
 }
 
-export function RegisterView() {
+export default function RegisterView() {
   const [state, setState] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
 

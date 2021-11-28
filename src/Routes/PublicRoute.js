@@ -1,15 +1,20 @@
 import { useSelector } from 'react-redux';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect } from 'react-router-dom';
 
 import { getIsLogIn } from '../redux/auth/auth-selectors';
 
-export function PublicRoute({ children, restricted = false, ...routeProps }) {
+export default function PublicRoute({
+  children,
+  restricted = false,
+  redirectTo = '/',
+  ...routeProps
+}) {
   const isLogIn = useSelector(getIsLogIn);
   const shouldRedirect = isLogIn && restricted;
 
   return (
     <Route {...routeProps}>
-      {shouldRedirect ? <Redirect to="/" /> : children}
+      {shouldRedirect ? <Redirect to={redirectTo} /> : children}
     </Route>
   );
 }

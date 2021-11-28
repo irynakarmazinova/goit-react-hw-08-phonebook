@@ -25,7 +25,7 @@ function reducer(state, action) {
   }
 }
 
-export function LoginView() {
+export default function LoginView() {
   const [state, setState] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
 

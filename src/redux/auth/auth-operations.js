@@ -22,11 +22,25 @@ export const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      // return rejectWithValue(error.message);
-      return console.log(error.message);
+      return rejectWithValue(error.message);
+      // return console.log(error.message);
     }
   },
 );
+// export const register = createAsyncThunk(
+//   'auth/addUser',
+//   async (credentials, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.post('/users/signup', credentials);
+//       token.set(data.token);
+//       if (data) {
+//         return data;
+//       }
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   },
+// );
 
 export const logIn = createAsyncThunk(
   'auth/login',
@@ -36,24 +50,48 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      // return rejectWithValue(error.messages);
-      return console.log(error.message);
+      return rejectWithValue(error.messages);
+      // return console.log(error.message);
     }
   },
 );
+// export const logIn = createAsyncThunk(
+//   'auth/loginUser',
+//   async (credentials, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.post('/users/login', credentials);
+//       token.set(data.token);
+
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   },
+// );
 
 export const logOut = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/users/logout');
-      token.unset(data.token);
+      await axios.post('/users/logout');
+      token.unset();
     } catch (error) {
       // return rejectWithValue(error.messages);
       return console.log(error.message);
     }
   },
 );
+// export const logOut = createAsyncThunk(
+//   '/users/logout',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       await axios.post('/users/logout');
+//       token.unset();
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   },
+// );
 
 export const refreshUser = createAsyncThunk(
   'aurh/refresh',
@@ -64,7 +102,7 @@ export const refreshUser = createAsyncThunk(
 
     if (!persistedToken) {
       return console.log('error');
-      //   return rejectWithValue();
+      // return rejectWithValue();
     }
     // if (persistedToken === null) {
     //     return rejectWithValue();
@@ -72,23 +110,40 @@ export const refreshUser = createAsyncThunk(
 
     token.set(persistedToken);
     try {
-      const response = await axios.get('/users/current');
-      const initialState = {
-        user: response.data,
-        token: persistedToken,
-        isLoggin: true,
-        loading: false,
-      };
-      return initialState;
+      // const response = await axios.get('/users/current');
+      // const initialState = {
+      //   user: response.data,
+      //   token: persistedToken,
+      //   isLoggin: true,
+      //   loading: false,
+      // };
+      // return initialState;
 
-      // const { data } = await axios.get('/users/current');
-      //     // return data;
+      const { data } = await axios.get('/users/current');
+      return data;
     } catch (error) {
       // return rejectWithValue(error.message);
       return console.log(error.message);
     }
   },
 );
+// export const refreshUser = createAsyncThunk(
+//   'auth/refresh',
+//   async (_, { getState, rejectWithValue }) => {
+//     const state = getState();
+//     const persistedToken = state.auth.token;
+//     if (!persistedToken) {
+//       return rejectWithValue();
+//     }
+//     token.set(persistedToken);
+//     try {
+//       const { data } = await axios.get('/users/current');
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   },
+// );
 
 // -------------------
 // вместо куки токены
