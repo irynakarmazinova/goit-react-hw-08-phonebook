@@ -1,7 +1,7 @@
 import { useEffect, Suspense, lazy } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// import { fetchContacts } from './redux/contacts/contacts-operations';
+import { fetchContacts } from './redux/contacts/contacts-operations';
 import { refreshUser } from './redux/auth/auth-operations';
 
 import { Navigation } from './components/Navigation/Navigation';
@@ -42,9 +42,9 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     !isFetchingCurrentUser && (
