@@ -1,9 +1,5 @@
-import Title from '../../components/Title/Title';
+import s from './HomeView.module.scss';
 
 export default function HomeView() {
-  return (
-    <div>
-      <Title title="This is home page." />
-    </div>
-  );
+  return <p className={s.title}>Find people & contact info</p>;
 }

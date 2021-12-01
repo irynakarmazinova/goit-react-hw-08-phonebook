@@ -20,14 +20,9 @@ export const register = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/signup', credentials);
       token.set(data.token);
-
-      //  if (data) {
-      //         return data;
-      //       }
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
-      // return console.log(error.message);
     }
   },
 );
@@ -41,7 +36,6 @@ export const logIn = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.messages);
-      // return console.log(error.message);
     }
   },
 );
@@ -53,8 +47,7 @@ export const logOut = createAsyncThunk(
       await axios.post('/users/logout');
       token.unset();
     } catch (error) {
-      // return rejectWithValue(error.messages);
-      return console.log(error.message);
+      return rejectWithValue(error.messages);
     }
   },
 );
@@ -66,16 +59,14 @@ export const refreshUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (!persistedToken) {
-      // return console.log('error');
       return rejectWithValue();
     }
     // if (persistedToken === null) {
     //     return rejectWithValue();
     //   }
 
-    token.set(persistedToken);
-
     try {
+      token.set(persistedToken);
       // const response = await axios.get('/users/current');
       // const initialState = {
       //   user: response.data,
@@ -88,8 +79,7 @@ export const refreshUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      // return rejectWithValue(error.message);
-      return console.log(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );

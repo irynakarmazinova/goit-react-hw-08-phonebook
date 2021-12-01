@@ -1,4 +1,3 @@
-// Добавь компонент <UserMenu>, состоящий из почты пользователя и кнопки Logout.
 import { useSelector, useDispatch } from 'react-redux';
 
 import { logOut } from '../../redux/auth/auth-operations';
@@ -8,12 +7,13 @@ import s from './UserMenu.module.scss';
 
 export function UserMenu() {
   const name = useSelector(getUserName);
-  console.log(name);
 
   const dispatch = useDispatch();
 
   return (
-    <>
+    <div className={s.box}>
+      <p className={s.text}>Wellcome to phonebook, {name}!</p>
+
       <button
         type="button"
         onClick={() => dispatch(logOut())}
@@ -21,8 +21,6 @@ export function UserMenu() {
       >
         Logout
       </button>
-
-      <p>Wellcome to phonebook, {name}!</p>
-    </>
+    </div>
   );
 }

@@ -1,8 +1,6 @@
 import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Title from '../../components/Title/Title';
-
 import { register } from '../../redux/auth/auth-operations';
 
 import s from './RegisterView.module.scss';
@@ -40,19 +38,22 @@ export default function RegisterView() {
 
   return (
     <div className={s.box}>
-      <Title title="This is register page." />
-
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
           Name
           <input
+            autoFocus
             className={s.input}
             type="text"
             name="name"
             value={state.name}
+            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Please check the correctness of the entered data."
+            placeholder="name"
             onChange={e =>
               setState({ type: e.target.name, payload: e.target.value })
             }
+            required
           />
         </label>
 
@@ -63,19 +64,25 @@ export default function RegisterView() {
             type="text"
             name="email"
             value={state.email}
+            pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+            title="Please check the entered data is correct."
+            placeholder="email"
             onChange={e =>
               setState({ type: e.target.name, payload: e.target.value })
             }
+            required
           />
         </label>
 
         <label>
           Password
           <input
+            autoComplete="off"
             className={s.input}
             type="password"
             name="password"
             value={state.password}
+            placeholder="password"
             onChange={e =>
               setState({ type: e.target.name, payload: e.target.value })
             }

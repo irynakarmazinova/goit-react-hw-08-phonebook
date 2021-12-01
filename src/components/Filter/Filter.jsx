@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFilter } from '../../redux/filter/filter-actions';
@@ -13,16 +12,20 @@ const Filter = () => {
   const onChange = ({ target: { value } }) => dispatch(changeFilter(value));
 
   return (
-    <label className={s.label}>
-      Find contacts by name
-      <input
-        type="text"
-        name="filter"
-        value={filterValue}
-        onChange={onChange}
-        className={s.input}
-      ></input>
-    </label>
+    <div className={s.box}>
+      <h2 className={s.title}>Contacts</h2>
+
+      <label className={s.label}>
+        Find contacts by name
+        <input
+          type="text"
+          name="filter"
+          value={filterValue}
+          onChange={onChange}
+          className={s.input}
+        ></input>
+      </label>
+    </div>
   );
 };
 export default Filter;

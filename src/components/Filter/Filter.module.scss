@@ -1,8 +1,17 @@
+.box {
+}
+
+.title {
+  margin-bottom: 20px;
+
+  font-weight: 700;
+  font-size: 23px;
+}
+
 .label {
   display: flex;
   flex-direction: column;
   width: 235px;
-  margin-bottom: 21px;
 
   font-weight: 400;
   font-size: 17px;

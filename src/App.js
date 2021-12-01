@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts } from './redux/contacts/contacts-operations';
 import { refreshUser } from './redux/auth/auth-operations';
 
-import { Navigation } from './components/Navigation/Navigation';
-import { AuthNav } from './components/AuthNav/AuthNav';
-import { UserMenu } from './components/UserMenu/UserMenu';
+import { Header } from './components/Header/Header';
+import { Footer } from './components/Footer/Footer';
 
-import { getIsLogIn, getIsFetchingCurrent } from './redux/auth/auth-selectors';
+import { getIsFetchingCurrent } from './redux/auth/auth-selectors';
 
 import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
@@ -33,7 +32,6 @@ const ContactsView = lazy(() =>
 );
 
 export default function App() {
-  const isLogIn = useSelector(getIsLogIn);
   const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
 
   const dispatch = useDispatch();
@@ -42,44 +40,33 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   return (
     !isFetchingCurrentUser && (
       <>
-        <div className="container">
-          <header style={{ display: 'flex', marginBottom: '20px' }}>
-            <Navigation />
-            {isLogIn ? <UserMenu /> : <AuthNav />}
-          </header>
+        <Header />
 
-          <main>
-            {/* <Switch> */}
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <PublicRoute exact path="/">
-                <HomeView />
-              </PublicRoute>
-              <PublicRoute exact path="/register" restricted>
-                <RegisterView />
-              </PublicRoute>
-              <PublicRoute
-                exact
-                path="/login"
-                restricted
-                redirectTo="/contacts"
-              >
-                <LoginView />
-              </PublicRoute>
-              <PrivateRoute exact path="/contacts" redirectTo="/login">
-                <ContactsView />
-              </PrivateRoute>
-            </Suspense>
-          </main>
+        <main style={{ padding: '20px 10px 20px 10px' }}>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <PublicRoute exact path="/">
+              <HomeView />
+            </PublicRoute>
+            <PublicRoute exact path="/register" restricted>
+              <RegisterView />
+            </PublicRoute>
+            <PublicRoute exact path="/login" restricted redirectTo="/contacts">
+              <LoginView />
+            </PublicRoute>
+            <PrivateRoute exact path="/contacts" redirectTo="/login">
+              <ContactsView />
+            </PrivateRoute>
+          </Suspense>
+        </main>
 
-          <footer>footer</footer>
-        </div>
+        <Footer />
       </>
     )
   );

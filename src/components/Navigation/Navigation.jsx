@@ -10,21 +10,16 @@ export function Navigation() {
 
   return (
     <nav>
-      <NavLink
-        // exact
-        to="/"
-        className={s.link}
-        // activeclassname={s.link_active}
-      >
+      <NavLink exact to="/" className={s.link} activeClassName={s.link_active}>
         Home
       </NavLink>
 
       {isLogIn && (
         <NavLink
-          // exact
+          exact
           to="/contacts"
           className={s.link}
-          // activeclassname={s.link_active}
+          activeClassName={s.link_active}
         >
           Contacts
         </NavLink>

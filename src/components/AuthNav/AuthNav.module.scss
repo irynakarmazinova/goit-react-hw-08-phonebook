@@ -1,10 +1,14 @@
+.box {
+  margin-left: auto;
+}
+
 .links {
   margin-bottom: 10px;
   margin-right: 10px;
 }
 
 .link {
-  font-weight: 400;
+  font-weight: 700;
   font-size: 17px;
 
   text-decoration: none;
@@ -12,6 +16,7 @@
   color: black;
 
   &_active {
-    color: red;
+    font-weight: 700;
+    color: #99c2f8;
   }
 }

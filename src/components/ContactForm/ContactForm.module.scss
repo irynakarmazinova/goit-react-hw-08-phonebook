@@ -1,12 +1,19 @@
-// @import 'App.scss';
+.box {
+  margin-right: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+
+  font-weight: 700;
+  font-size: 23px;
+}
 
 .form {
   width: 235px;
   height: 185px;
   padding: 11px;
   margin-bottom: 20px;
-
-  border: 1px solid black;
 }
 
 .label {
@@ -39,6 +46,7 @@
 
 .btn {
   padding: 3px 8px 3px 8px;
+  cursor: pointer;
 
   font-weight: 400;
   font-size: 11px;
@@ -47,7 +55,8 @@
   border: 1px solid rgb(206, 205, 205);
   background-color: #fff;
 
+  &:hover,
   &:focus {
-    background-color: #5b97f6;
+    background-color: #99c2f8;
   }
 }

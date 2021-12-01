@@ -1,8 +1,6 @@
 import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Title from '../../components/Title/Title';
-
 import { logIn } from '../../redux/auth/auth-operations';
 
 import s from './LoginView.module.scss';
@@ -36,16 +34,18 @@ export default function LoginView() {
 
   return (
     <div>
-      <Title title="This is login page." />
-
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
           Email
           <input
+            autoFocus
             className={s.input}
             type="text"
             name="email"
             value={state.email}
+            pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+            title="Please check the entered data is correct."
+            placeholder="email"
             onChange={e =>
               setState({ type: e.target.name, payload: e.target.value })
             }
@@ -59,6 +59,7 @@ export default function LoginView() {
             type="password"
             name="password"
             value={state.password}
+            placeholder="password"
             onChange={e =>
               setState({ type: e.target.name, payload: e.target.value })
             }

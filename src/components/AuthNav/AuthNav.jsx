@@ -4,23 +4,23 @@ import s from './AuthNav.module.scss';
 
 export function AuthNav() {
   return (
-    <>
+    <div className={s.box}>
       <NavLink
-        // exact
+        exact
         to="/register"
         className={s.link}
-        // activeClassName={s.link_active}
+        activeClassName={s.link_active}
       >
         Register
       </NavLink>
       <NavLink
-        // exact
+        exact
         to="/login"
         className={s.link}
-        // activeClassName={s.link_active}
+        activeClassName={s.link_active}
       >
         Login
       </NavLink>
-    </>
+    </div>
   );
 }
